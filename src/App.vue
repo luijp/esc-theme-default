@@ -23,7 +23,7 @@ import Footer from './component/Footer/index.vue'
   margin: 0 auto;
 }
 .content{
-  min-height: 80vh;
+  min-height: 75vh;
   margin: 50px;
 }
 </style>
