@@ -1,16 +1,9 @@
 <script setup>
-import useSettingsStore from '../../store/useSettingsStore.js'
-import {onMounted, ref} from "vue";
-const settingsRef = ref({global:null,custom:null})
-const isLoaded = ref(false);
-onMounted(async ()=>{
-  settingsRef.value = await useSettingsStore.value
-  isLoaded.value = true
-})
+import {settingsRef,settingsLoaded} from '../../store/useSettingsStore.js'
 </script>
 
 <template>
-<div class="header-container" v-if="isLoaded">
+<div class="header-container" v-if="settingsLoaded">
   <div class="logo">
     <div class="avatar" v-if="settingsRef.custom.hasOwnProperty('avatar')">
       <img :src="settingsRef.custom.avatar" alt="avatar" v-if="settingsRef.custom.avatar" height="50px" width="50px">
@@ -50,6 +43,7 @@ onMounted(async ()=>{
     .site-title{
       font-size: 1.8em;
       margin-left: 30px;
+      font-weight: bold;
     }
   }
 }
