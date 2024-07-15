@@ -1,24 +1,26 @@
 <script setup>
-import * as settingsApi from '../../api/settings.js'
+import useSettingsStore from '../../store/useSettingsStore.js'
 import {onMounted, ref} from "vue";
 const settingsRef = ref({global:null,custom:null})
 const isLoaded = ref(false);
 onMounted(async ()=>{
-  settingsRef.value.global = settingsApi.getGlobalSettings()
-  settingsRef.value.custom = settingsApi.getCustomSettings()
+  settingsRef.value = await useSettingsStore.value
   isLoaded.value = true
-
 })
 </script>
 
 <template>
 <div class="header-container" v-if="isLoaded">
   <div class="logo">
-    {{ settingsRef.global.hasOwnProperty('siteTitle')? settingsRef.global.siteTitle : ''}}
+    <div class="avatar" v-if="settingsRef.custom.hasOwnProperty('avatar')">
+      <img :src="settingsRef.custom.avatar" alt="avatar" v-if="settingsRef.custom.avatar" height="50px" width="50px">
+    </div>
+    <div class="site-title">
+      {{ settingsRef.global.hasOwnProperty('siteTitle')? settingsRef.global.siteTitle : ''}}
+    </div>
   </div>
-  <div class="avatar" v-if="settingsRef.custom.hasOwnProperty('avatar')">
-    <img :src="settingsRef.custom.avatar" alt="avatar" v-if="settingsRef.custom.avatar" height="50px" width="50px">
-  </div>
+
+
 
   <div class="nav">
     <router-link to="/" class="link-item">
@@ -42,6 +44,14 @@ onMounted(async ()=>{
   display: flex;
   justify-content: space-between;
   margin-top: 50px;
+  .logo{
+    display: flex;
+    align-items: center;
+    .site-title{
+      font-size: 1.8em;
+      margin-left: 30px;
+    }
+  }
 }
 .link-item{
   color: #b0b0b0;
