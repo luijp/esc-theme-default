@@ -9,6 +9,7 @@ import setTitle from '../../util/setTitle.js'
 import formatDate from '../../util/formatDate.js'
 import {useRoute, useRouter} from 'vue-router'
 import {Clock, EditPen, Timer} from "@element-plus/icons-vue";
+import Comment from '../../component/Comment/index.vue'
 const postDataRef = ref()
 const isLoaded = ref(false)
 const tagsRef = ref()
@@ -80,6 +81,10 @@ watchEffect(async ()=>{
   </div>
 
   <div class="content markdown-body" v-html="md.render(postDataRef.content)">
+  </div>
+
+  <div class="comment">
+    <Comment :postId="postDataRef.id" />
   </div>
 </div>
 </template>
