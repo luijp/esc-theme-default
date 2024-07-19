@@ -27,6 +27,9 @@ const handleYear = (postCreateTime)=>{
 
 <template>
 <div class="home-container">
+  <div class="empty" v-if="isLoaded && !postListRef">
+    <el-empty :image-size="150" description="暂无文章"/>
+  </div>
   <div class="post-item" v-if="isLoaded" v-for="postItem in postListRef.postsList">
     <div class="year" v-if="handleYear(postItem.createTime)">{{ (new Date(postItem.createTime)).getFullYear() }}</div>
     <div class="post">

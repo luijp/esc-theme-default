@@ -23,7 +23,10 @@ onMounted(async ()=>{
 
 <template>
 <div class="detail-container">
-  <div class="post-item" v-if="isLoaded" v-for="postItem in postListRef.postsList">
+  <div class="empty" v-if="isLoaded && !postListRef">
+    <el-empty :image-size="150" description="该分类下没有文章"/>
+  </div>
+  <div class="post-item" v-if="isLoaded && postListRef" v-for="postItem in postListRef.postsList">
     <div class="category-title">{{ categoriesRef.name }}</div>
     <div class="post">
       <div class="title">

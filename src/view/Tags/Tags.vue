@@ -10,7 +10,10 @@ onMounted(async ()=>{
 </script>
 
 <template>
-  <div class="tag-item" v-if="isLoaded" v-for="tag in tagsRef">
+  <div class="empty" v-if="isLoaded && !tagsRef">
+    <el-empty :image-size="150" description="暂无标签" />
+  </div>
+  <div class="tag-item" v-if="isLoaded && tagsRef" v-for="tag in tagsRef">
     <router-link :to="'/tags/' + tag.alias">
       {{ tag.name}}
     </router-link>

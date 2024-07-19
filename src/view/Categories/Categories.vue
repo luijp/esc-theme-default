@@ -28,7 +28,10 @@ onMounted(async ()=>{
 
 <template>
   <div class="list-container" v-if="isLoaded">
-    <div class="category-item" v-for="category in categoriesRef">
+    <div class="empty" v-if="!categoriesRef">
+      <el-empty :image-size="150" description="暂无分类" />
+    </div>
+    <div class="category-item" v-for="category in categoriesRef" v-if="categoriesRef">
       <router-link :to="'/categories/' + category.alias">
         {{ category.name}}
       </router-link>

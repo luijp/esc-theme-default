@@ -82,8 +82,12 @@ const gAvatar = computed(()=>{
   </div>
   <el-divider border-style="dotted" />
   <h3>评论</h3>
-  <div class="comment-list" v-for="comment in commentRef.commentList" v-if="commentRef.commentList">
 
+  <div class="empty" v-if="!commentRef.commentList">
+    <el-empty :image-size="100" description="暂无评论" />
+  </div>
+
+  <div class="comment-list" v-for="comment in commentRef.commentList" v-if="commentRef.commentList">
     <div class="user-info">
       <div class="avatar">
         <el-image lazy :src="gAvatar(comment.email)" :fit='"cover"'>
@@ -103,9 +107,6 @@ const gAvatar = computed(()=>{
       {{  comment.content }}
     </div>
     <el-divider border-style="dashed" />
-  </div>
-  <div class="empty">
-    <el-empty :image-size="100" />
   </div>
   <div class="example-pagination-block">
     <el-pagination layout="prev, pager, next"
