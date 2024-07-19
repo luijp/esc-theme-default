@@ -110,7 +110,6 @@ const gAvatar = computed(()=>{
   <div class="example-pagination-block">
     <el-pagination layout="prev, pager, next"
                    :hide-on-single-page="true"
-                   v-if="postListRef"
                    :page-count="Math.ceil(commentRef.total/commentRef.pageSize)"
                    v-model:current-page="pageNumRef"
     />
