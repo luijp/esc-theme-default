@@ -26,4 +26,7 @@ import Footer from './component/Footer/index.vue'
   min-height: 75vh;
   margin: 50px;
 }
+.header{
+  margin: 50px;
+}
 </style>
