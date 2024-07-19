@@ -58,6 +58,7 @@ const gAvatar = computed(()=>{
 
 <template>
 <div class="comment-container" v-if="isLoaded">
+  <el-divider border-style="dotted" />
   <h3>添加评论</h3>
   <div class="add-comment">
 
@@ -120,7 +121,7 @@ const gAvatar = computed(()=>{
 <style scoped>
 .comment-container{
   h3{
-    margin-top: 30px;
+    margin-top: 100px;
     margin-bottom: 20px;
   }
 }
