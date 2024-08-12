@@ -86,7 +86,7 @@ const gAvatar = computed(()=>{
   <div class="empty" v-if="!commentRef.commentList">
     <el-empty :image-size="100" description="暂无评论" />
   </div>
-
+  <el-empty description="暂无评论" v-if="commentRef.total === 0"/>
   <div class="comment-list" v-for="comment in commentRef.commentList" v-if="commentRef.commentList">
     <div class="user-info">
       <div class="avatar">
@@ -121,7 +121,7 @@ const gAvatar = computed(()=>{
 <style scoped>
 .comment-container{
   h3{
-    margin-top: 100px;
+    margin-top: 50px;
     margin-bottom: 20px;
   }
 }
