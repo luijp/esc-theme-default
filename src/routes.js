@@ -10,7 +10,7 @@ import Micro from './view/Micro/index.vue'
 
 const routes = [
     { path: '/', component: Home ,meta: { title: '主页' }},
-    { path: '/micro/:currentPage?', component: Micro ,meta: { title: '碎语' }},
+    { path: '/micro', component: Micro ,meta: { title: '碎语' }},
     { path: '/categories', component: Categories ,
         meta: { title: '分类' },
         children:[

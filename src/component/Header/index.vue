@@ -20,7 +20,7 @@ import {settingsRef,settingsLoaded} from '../../store/useSettingsStore.js'
       首页
     </router-link>
 
-    <router-link to="/micro" class="link-item">
+    <router-link to="/micro" exact class="link-item">
       碎语
     </router-link>
 

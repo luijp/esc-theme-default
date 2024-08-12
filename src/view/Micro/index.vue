@@ -5,16 +5,23 @@ import formatDate from '../../util/formatDate.js'
 
 const route = useRoute()
 const router = useRouter()
-import {computed, ref, watchEffect} from "vue";
+import {computed, onMounted, ref, watchEffect} from "vue";
 const microListRef = ref()
-const currentPageNumRef = ref(Number(route.params.currentPage) || 1)
+const currentPageNumRef = ref(Number(route.query.page) || 1)
 const isLoaded = ref(false)
-watchEffect(async ()=>{
+onMounted(async ()=>{
   isLoaded.value = false
-  await router.push("/micro/" + currentPageNumRef.value)
   microListRef.value = await postApi.getPostList(currentPageNumRef.value,50,3)
   isLoaded.value = true
 })
+watchEffect(async ()=>{
+    await router.push({
+    query:{
+      ...route.query,
+      page: currentPageNumRef.value,
+    }
+  })
+ })
 
 </script>
 
