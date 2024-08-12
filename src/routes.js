@@ -7,10 +7,18 @@ import TagsItem from './view/Tags/Tags.vue'
 import TagsDetail from './view/Tags/Detail.vue'
 import Post from './view/Post/index.vue'
 import Micro from './view/Micro/index.vue'
+import GalleryDetail from './view/Gallery/Detail.vue'
+import GalleryList from './view/Gallery/List.vue'
 
 const routes = [
     { path: '/', component: Home ,meta: { title: '主页' }},
     { path: '/micro', component: Micro ,meta: { title: '碎语' }},
+    { path: '/gallery',
+        children: [
+            { path: '/gallery', component: GalleryList, meta: {title: '相册'}},
+            { path: '/gallery/:galleryId', component: GalleryDetail, meta: {title: '相册'}}
+        ]
+    },
     { path: '/categories', component: Categories ,
         meta: { title: '分类' },
         children:[

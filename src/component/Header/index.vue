@@ -24,6 +24,10 @@ import {settingsRef,settingsLoaded} from '../../store/useSettingsStore.js'
       碎语
     </router-link>
 
+    <router-link to="/gallery" exact class="link-item">
+      相册
+    </router-link>
+
     <router-link to="/categories" class="link-item">
       分类
     </router-link>
