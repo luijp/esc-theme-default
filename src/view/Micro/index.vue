@@ -19,9 +19,9 @@ watchEffect(async ()=>{
 </script>
 
 <template>
-<div class="micro-container">
-  <el-empty description="暂无碎语" v-if="isLoaded && microListRef.total === 0"/>
-  <div class="micro-item" v-for="microItem in microListRef.postsList" v-if="isLoaded">
+<div class="micro-container" v-if="isLoaded">
+  <el-empty description="暂无碎语" v-if="microListRef.total === 0"/>
+  <div class="micro-item" v-for="microItem in microListRef.postsList" >
     <div class="meta-info">
       {{ formatDate(microItem.createTime,0) }}
     </div>
