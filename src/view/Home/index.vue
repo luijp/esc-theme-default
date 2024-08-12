@@ -2,15 +2,27 @@
 import * as postApi from '../../api/post.js'
 import {onMounted, ref, watchEffect} from "vue";
 import {Lock} from "@element-plus/icons-vue";
-const pageNumRef = ref(1)
+import {useRouter, useRoute} from 'vue-router'
+
+const route = useRoute()
+const router = useRouter()
+const pageNumRef =ref(Number(route.query.page) || 1)
 const postListRef = ref()
 const isLoaded = ref(false)
-const refreshPostList = async () => {
+
+onMounted(async ()=>{
+  isLoaded.value = false
   postListRef.value = await postApi.getPostList(pageNumRef.value)
   isLoaded.value = true
-}
+})
+
 watchEffect(async ()=>{
-  await refreshPostList()
+  await router.push({
+    query: {
+      ...route.query,
+      page: pageNumRef.value,
+    }
+  })
 })
 
 let lastPostYear = 0
