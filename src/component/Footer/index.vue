@@ -1,21 +1,22 @@
 <script setup>
-import {settingsRef,settingsLoaded} from '../../store/useSettingsStore.js'
+import {settingsLoaded, settingsRef} from '../../store/useSettingsStore.js'
+
 let hostname = window.location.hostname;
 </script>
 
 <template>
-<div class="footer-container" v-if="settingsLoaded">
-  <p>
-    <span>Copyright &copy; 2024 {{ hostname }}</span>
-    <span><a href="https://beian.miit.gov.cn/" target="_blank">{{ settingsRef.global.icp }}</a></span>
-  </p>
-  <p>
-    <span>Powered by ESC</span>
-    <span>Theme Esc-theme-default</span>
-  </p>
+  <div v-if="settingsLoaded" class="footer-container">
+    <p>
+      <span>Copyright &copy; 2024 {{ hostname }}</span>
+      <span><a href="https://beian.miit.gov.cn/" target="_blank">{{ settingsRef.global.icp }}</a></span>
+    </p>
+    <p>
+      <span>Powered by ESC</span>
+      <span>Theme Esc-theme-default</span>
+    </p>
 
 
-</div>
+  </div>
 </template>
 
 <style scoped>
@@ -24,10 +25,12 @@ let hostname = window.location.hostname;
   font-size: 12px;
   color: #808080;
   margin: 20px;
-  p{
+
+  p {
     margin-top: 10px;
   }
-  span{
+
+  span {
     margin-right: 10px;
   }
 }

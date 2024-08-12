@@ -1,66 +1,69 @@
 <script setup>
-import {settingsRef,settingsLoaded} from '../../store/useSettingsStore.js'
+import {settingsLoaded, settingsRef} from '../../store/useSettingsStore.js'
 </script>
 
 <template>
-<div class="header-container" v-if="settingsLoaded">
-  <div class="logo">
-    <div class="avatar" v-if="settingsRef.custom.hasOwnProperty('avatar')">
-      <img :src="settingsRef.custom.avatar" alt="avatar" v-if="settingsRef.custom.avatar" height="50px" width="50px">
+  <div v-if="settingsLoaded" class="header-container">
+    <div class="logo">
+      <div v-if="settingsRef.custom.hasOwnProperty('avatar')" class="avatar">
+        <img v-if="settingsRef.custom.avatar" :src="settingsRef.custom.avatar" alt="avatar" height="50px" width="50px">
+      </div>
+      <div class="site-title">
+        {{ settingsRef.global.hasOwnProperty('siteTitle') ? settingsRef.global.siteTitle : '' }}
+      </div>
     </div>
-    <div class="site-title">
-      {{ settingsRef.global.hasOwnProperty('siteTitle')? settingsRef.global.siteTitle : ''}}
+
+
+    <div class="nav">
+      <router-link class="link-item" to="/">
+        首页
+      </router-link>
+
+      <router-link class="link-item" exact to="/micro">
+        碎语
+      </router-link>
+
+      <router-link class="link-item" exact to="/gallery">
+        相册
+      </router-link>
+
+      <router-link class="link-item" to="/categories">
+        分类
+      </router-link>
+
+      <router-link class="link-item" to="/tags">
+        标签
+      </router-link>
     </div>
+
   </div>
-
-
-
-  <div class="nav">
-    <router-link to="/" class="link-item">
-      首页
-    </router-link>
-
-    <router-link to="/micro" exact class="link-item">
-      碎语
-    </router-link>
-
-    <router-link to="/gallery" exact class="link-item">
-      相册
-    </router-link>
-
-    <router-link to="/categories" class="link-item">
-      分类
-    </router-link>
-
-    <router-link to="/tags" class="link-item">
-      标签
-    </router-link>
-  </div>
-
-</div>
 </template>
 
 <style scoped>
-.header-container{
+.header-container {
   display: flex;
   justify-content: space-between;
   margin-top: 50px;
-  .logo{
+
+  .logo {
     display: flex;
     align-items: center;
-    .site-title{
+
+    .site-title {
       font-size: 1.8em;
       margin-left: 30px;
       font-weight: bold;
     }
   }
 }
-.link-item{
+
+.link-item {
   color: #b0b0b0;
   margin-right: 20px;
-  &.router-link-active{
-  color: #686868;
-}
+
+  &.router-link-active {
+    color: #686868;
+  }
 
 }
 

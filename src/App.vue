@@ -4,29 +4,31 @@ import Footer from './component/Footer/index.vue'
 </script>
 
 <template>
-<div class="app-container">
-  <div class="header">
-    <Header />
+  <div class="app-container">
+    <div class="header">
+      <Header/>
+    </div>
+    <div class="content">
+      <RouterView/>
+    </div>
+    <div class="footer">
+      <Footer/>
+    </div>
   </div>
-  <div class="content">
-    <RouterView />
-  </div>
-  <div class="footer">
-    <Footer />
-  </div>
-</div>
 </template>
 
 <style scoped>
-.app-container{
+.app-container {
   width: 1000px;
   margin: 0 auto;
 }
-.content{
+
+.content {
   min-height: 75vh;
   margin: 50px;
 }
-.header{
+
+.header {
   margin: 50px;
 }
 </style>

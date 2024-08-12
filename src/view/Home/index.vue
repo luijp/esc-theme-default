@@ -2,21 +2,21 @@
 import * as postApi from '../../api/post.js'
 import {onMounted, ref, watchEffect} from "vue";
 import {Lock} from "@element-plus/icons-vue";
-import {useRouter, useRoute} from 'vue-router'
+import {useRoute, useRouter} from 'vue-router'
 
 const route = useRoute()
 const router = useRouter()
-const pageNumRef =ref(Number(route.query.page) || 1)
+const pageNumRef = ref(Number(route.query.page) || 1)
 const postListRef = ref()
 const isLoaded = ref(false)
 
-onMounted(async ()=>{
+onMounted(async () => {
   isLoaded.value = false
   postListRef.value = await postApi.getPostList(pageNumRef.value)
   isLoaded.value = true
 })
 
-watchEffect(async ()=>{
+watchEffect(async () => {
   await router.push({
     query: {
       ...route.query,
@@ -26,11 +26,11 @@ watchEffect(async ()=>{
 })
 
 let lastPostYear = 0
-const handleYear = (postCreateTime)=>{
+const handleYear = (postCreateTime) => {
   const postDate = new Date(postCreateTime)
-  if(postDate.getFullYear() === lastPostYear){
+  if (postDate.getFullYear() === lastPostYear) {
     return false
-  }else{
+  } else {
     lastPostYear = postDate.getFullYear()
     return postDate.getFullYear()
   }
@@ -38,50 +38,53 @@ const handleYear = (postCreateTime)=>{
 </script>
 
 <template>
-<div class="home-container">
-  <div class="empty" v-if="isLoaded && !postListRef">
-    <el-empty :image-size="150" description="暂无文章"/>
-  </div>
-  <div class="post-item" v-if="isLoaded" v-for="postItem in postListRef.postsList">
-    <div class="year" v-if="handleYear(postItem.createTime)">{{ (new Date(postItem.createTime)).getFullYear() }}</div>
-    <div class="post">
+  <div class="home-container">
+    <div v-if="isLoaded && !postListRef" class="empty">
+      <el-empty :image-size="150" description="暂无文章"/>
+    </div>
+    <div v-for="postItem in postListRef.postsList" v-if="isLoaded" class="post-item">
+      <div v-if="handleYear(postItem.createTime)" class="year">{{ (new Date(postItem.createTime)).getFullYear() }}</div>
+      <div class="post">
         <div class="title">
           <ul>
             <li>
               <router-link :to="'/post/' + postItem.id">
-                {{postItem.title}}
+                {{ postItem.title }}
               </router-link>
-              <el-icon v-if="postItem.encrypt"><Lock /></el-icon>
+              <el-icon v-if="postItem.encrypt">
+                <Lock/>
+              </el-icon>
             </li>
           </ul>
         </div>
+      </div>
     </div>
-  </div>
 
-  <el-pagination layout="prev, pager, next"
-                 :hide-on-single-page="true"
-                 v-if="postListRef"
-                 :page-count="Math.ceil(postListRef.total/postListRef.size)"
-                 v-model:current-page="pageNumRef"
-  />
-</div>
+    <el-pagination v-if="postListRef"
+                   v-model:current-page="pageNumRef"
+                   :hide-on-single-page="true"
+                   :page-count="Math.ceil(postListRef.total/postListRef.size)"
+                   layout="prev, pager, next"
+    />
+  </div>
 </template>
 
 <style scoped>
-.year
-{
+.year {
   font-size: 2em;
   font-weight: bold;
   margin-bottom: 30px;
   margin-top: 50px;
 }
-.title{
+
+.title {
   margin-left: 50px;
   color: #585858;
   font-size: 1.2em;
   text-decoration: underline;
 }
-.el-pagination{
+
+.el-pagination {
   justify-content: center;
   margin-top: 50px;
 }
