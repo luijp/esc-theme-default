@@ -2,10 +2,23 @@
 import * as postApi from '../../api/post.js'
 import {useRoute,useRouter} from 'vue-router'
 import formatDate from '../../util/formatDate.js'
+import markdownit from 'markdown-it'
+import hljs from "highlight.js";
+const md = markdownit({
+  highlight: function (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(str, { language: lang }).value;
+      } catch (__) {}
+    }
+    return ''; // use external default escaping
+  }
+})
 
 const route = useRoute()
 const router = useRouter()
 import {computed, onMounted, ref, watchEffect} from "vue";
+
 const microListRef = ref()
 const currentPageNumRef = ref(Number(route.query.page) || 1)
 const isLoaded = ref(false)
@@ -32,8 +45,7 @@ watchEffect(async ()=>{
     <div class="meta-info">
       {{ formatDate(microItem.createTime,0) }}
     </div>
-    <div class="content">
-      {{ microItem.content }}
+    <div class="content markdown-body" v-html="md.render(microItem.content)">
     </div>
   </div>
 
