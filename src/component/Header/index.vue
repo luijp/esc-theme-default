@@ -9,7 +9,9 @@ import {settingsLoaded, settingsRef} from '../../store/useSettingsStore.js'
         <img v-if="settingsRef.custom.avatar" :src="settingsRef.custom.avatar" alt="avatar" height="50px" width="50px">
       </div>
       <div class="site-title">
-        {{ settingsRef.global.hasOwnProperty('siteTitle') ? settingsRef.global.siteTitle : '' }}
+        <router-link to="/">
+          {{ settingsRef.global.hasOwnProperty('siteTitle') ? settingsRef.global.siteTitle : '' }}
+        </router-link>
       </div>
     </div>
 
