@@ -82,6 +82,11 @@ const handleYear = (postCreateTime) => {
   color: #585858;
   font-size: 1.2em;
   text-decoration: underline;
+  ul {
+    li {
+      margin-top: 5px;
+    }
+  }
 }
 
 .el-pagination {
